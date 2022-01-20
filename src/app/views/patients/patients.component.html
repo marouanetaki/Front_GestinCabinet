@@ -1,0 +1,126 @@
+<div class="animated fadeIn">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i> Liste des Patients
+        <div class="card-header-actions">
+          <button class="btn btn-success btn-sm" (click)="exportElmToExcel()">
+            <i class="fa fa-download mr-2"></i> Export
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table text-center table-striped" #patientTable>
+          <thead class="bg-dark">
+            <tr>
+              <th width="100"><b>Actions</b></th>
+              <th>#Id</th>
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>CIN</th>
+              <th>Sex</th>
+              <th>Telephone</th>
+              <th>Date Naissance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  *ngIf="patient.id == null"
+                  class="btn btn-primary btn-block"
+                  (click)="create()"
+                  ><i class="icon-plus text-white"></i
+                ></a>
+                <a
+                  *ngIf="patient.id != null"
+                  class="btn btn-success btn-block"
+                  (click)="update()"
+                  ><i class="icon-check text-white"></i
+                ></a>
+              </td>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="patient.nom"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="patient.prenom"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="patient.cin"
+                  required
+                />
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="patient.sex">
+                  <option value="Homme">Homme</option>
+                  <option value="Femme">Femme</option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="tel"
+                  class="form-control"
+                  [(ngModel)]="patient.telephone"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="patient.dateNaissance"
+                  required
+                />
+              </td>
+            </tr>
+            <tr *ngFor="let item of listePatient">
+              <td>
+                <a class="btn btn-info btn-sm" (click)="edit(item)"
+                  ><i class="icon-pencil text-white"></i
+                ></a>
+                <a
+                  class="btn btn-danger btn-sm"
+                  (click)="deletePatient(item.id)"
+                  ><i class="fa fa-trash text-white"></i
+                ></a>
+              </td>
+              <td>
+                <b>{{ item.id }}</b>
+              </td>
+              <td>{{ item.nom }}</td>
+              <td>{{ item.prenom }}</td>
+              <td>{{ item.cin }}</td>
+              <td>
+                <span class="badge badge-info text-white">
+                  <i
+                    [ngClass]="{
+                      'icon-symbol-male': item.sex === 'Homme',
+                      'icon-symbol-female': item.sex === 'Femme'
+                    }"
+                  ></i>
+                  {{ item.sex }}
+                </span>
+              </td>
+              <td>{{ item.telephone }}</td>
+              <td>{{ item.dateNaissance }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

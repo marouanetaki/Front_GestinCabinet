@@ -1,0 +1,68 @@
+<div class="animated fadeIn">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-eyeglass"></i> Liste des Specialité
+        <div class="card-header-actions">
+          <button class="btn btn-success btn-sm" (click)="exportElmToExcel()">
+            <i class="fa fa-download mr-2"></i> Export
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table #specialiteTable class="table text-center table-striped">
+          <thead class="bg-dark">
+            <tr>
+              <th width="100"><b>Actions</b></th>
+              <th>#Id</th>
+              <th>Specialite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  *ngIf="specialite.id == null"
+                  class="btn btn-primary btn-block"
+                  (click)="create()"
+                  ><i class="icon-plus text-white"></i
+                ></a>
+                <a
+                  *ngIf="specialite.id != null"
+                  class="btn btn-success btn-block"
+                  (click)="update()"
+                  ><i class="icon-check text-white"></i
+                ></a>
+              </td>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="specialite.specialite"
+                  required
+                />
+              </td>
+            </tr>
+            <tr *ngFor="let item of liste">
+              <td>
+                <a class="btn btn-info btn-sm" (click)="edit(item)"
+                  ><i class="icon-pencil text-white"></i
+                ></a>
+                <a
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteSpecialite(item.id)"
+                  ><i class="fa fa-trash text-white"></i
+                ></a>
+              </td>
+              <td scope="row">
+                <b>{{ item.id }}</b>
+              </td>
+              <td>{{ item.specialite }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

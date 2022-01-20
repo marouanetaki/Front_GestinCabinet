@@ -1,0 +1,163 @@
+<div class="animated fadeIn">
+  <div class="col-md-12">
+    <button
+      *ngIf="!showForm"
+      class="btn btn-primary mb-2"
+      (click)="showForm = !showForm"
+    >
+      <i class="icon-plus mr-2"></i>Ajouter nouveau rendez-vous
+    </button>
+    <div class="card" *ngIf="showForm">
+      <div class="card-header">Ajouter/Modifier Rendez-vous</div>
+      <div class="card-body">
+        <div class="row">
+          <label class="col-md-6" for="patient"
+            >Patient
+            <select id="patient" class="form-control" [(ngModel)]="rdv.patient">
+              <option *ngFor="let pt of listePt" [ngValue]="pt">
+                {{ pt.nom }} {{ pt.prenom }}
+              </option>
+            </select>
+          </label>
+          <label class="col-md-6" for="medecin"
+            >Medecin
+            <select id="patient" class="form-control" [(ngModel)]="rdv.medecin">
+              <option *ngFor="let md of listeMd" [ngValue]="md">
+                {{ md.nom }} {{ md.prenom }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <div class="row mt-2">
+          <label class="col-md-6" for="date"
+            >Date Rendez-vous
+            <input
+              type="date"
+              id="date"
+              class="form-control"
+              [(ngModel)]="rdv.dateRdv"
+            />
+          </label>
+          <label class="col-md-6" for="heure"
+            >Heure Rendez-vous
+            <input
+              type="time"
+              id="heure"
+              class="form-control"
+              [(ngModel)]="rdv.heure"
+            />
+          </label>
+        </div>
+        <div class="row mt-2 mb-2">
+          <label class="col-md-12" for="note"
+            >Note à ajouter
+            <textarea
+              class="form-control"
+              id="note"
+              [(ngModel)]="rdv.note"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          *ngIf="rdv.id == null"
+          (click)="create()"
+          class="btn btn-primary btn-block"
+        >
+          <i class="icon-plus mr-2"></i>Ajouter
+        </button>
+        <button
+          *ngIf="rdv.id != null"
+          (click)="update()"
+          class="btn btn-success btn-block"
+        >
+          <i class="icon-check mr-2"></i>Modifier
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-calendar"></i> Liste des Rendez-vous
+      </div>
+      <div class="card-body">
+        <table class="table text-center table-striped">
+          <thead class="bg-dark">
+            <tr>
+              <th width="100"><b>Actions</b></th>
+              <th>Patient</th>
+              <th>Date Rendez-vous</th>
+              <th>Heure</th>
+              <th>Medecin</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of liste">
+              <td>
+                <a class="btn btn-info btn-sm" (click)="edit(item)"
+                  ><i class="icon-pencil text-white"></i
+                ></a>
+                <a class="btn btn-danger btn-sm" (click)="deleterdv(item.id)"
+                  ><i class="fa fa-trash text-white"></i
+                ></a>
+              </td>
+              <td>{{ item.patient.nom }} {{ item.patient.prenom }}</td>
+              <td>{{ item.dateRdv }}</td>
+              <td>{{ item.heure }}</td>
+              <td>{{ item.medecin.nom }} {{ item.medecin.prenom }}</td>
+              <td>
+                <a
+                  class="btn btn-secondary btn-active btn-sm"
+                  (click)="show(item.id)"
+                  ><i class="fa fa-eye"> Consulter</i></a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div
+    class="modal"
+    id="myModal"
+    [style.display]="showModal ? 'block' : 'none'"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title">Detail</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            (click)="hide()"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body"></div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="hide()"
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+</div>

@@ -1,0 +1,149 @@
+<div class="animated fadeIn">
+  <div class="col-md-12">
+    <button
+      *ngIf="!showForm"
+      class="btn btn-primary mb-2"
+      (click)="showForm = !showForm"
+    >
+      <i class="icon-olus mr-2"></i>Ajouter nouveau dossier
+    </button>
+    <div class="card" *ngIf="showForm">
+      <div class="card-header">Ajouter/Modifier Dossier medical</div>
+      <div class="card-body">
+        <div class="row">
+          <label class="col-md-6" for="patient"
+            >Patient
+            <select
+              id="patient"
+              class="form-control"
+              [(ngModel)]="dossier.patient"
+            >
+              <option *ngFor="let pt of listePt" [ngValue]="pt">
+                {{ pt.nom }} {{ pt.prenom }}
+              </option>
+            </select>
+          </label>
+          <label class="col-md-6" for="date"
+            >Date Creation
+            <input
+              type="date"
+              id="date"
+              class="form-control"
+              [(ngModel)]="dossier.dateCreation"
+            />
+          </label>
+        </div>
+        <div class="row mt-2 mb-2">
+          <label class="col-md-12" for="note"
+            >Diagnostic/Resultat
+            <textarea
+              class="form-control"
+              id="note"
+              [(ngModel)]="dossier.diagnostic"
+              rows="5"
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          *ngIf="dossier.id == null"
+          (click)="create()"
+          class="btn btn-primary btn-block"
+        >
+          <i class="icon-plus mr-2"></i>Ajouter
+        </button>
+        <button
+          *ngIf="dossier.id != null"
+          (click)="update()"
+          class="btn btn-success btn-block"
+        >
+          <i class="icon-check mr-2"></i>Modifier
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-notebook"></i> Liste des Dossiers Medicaux
+      </div>
+      <div class="card-body">
+        <table class="table text-center table-striped">
+          <thead class="bg-dark">
+            <tr>
+              <th width="100"><b>Actions</b></th>
+              <th>Id Dossier</th>
+              <th>Patient</th>
+              <th>Date Creation</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of liste">
+              <td>
+                <a class="btn btn-info btn-sm" (click)="edit(item)"
+                  ><i class="icon-pencil text-white"></i
+                ></a>
+                <a
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteDossier(item.id)"
+                  ><i class="fa fa-trash text-white"></i
+                ></a>
+              </td>
+              <td>
+                <b>{{ item.id }} </b>
+              </td>
+              <td>{{ item.patient.nom }} {{ item.patient.prenom }}</td>
+              <td>{{ item.dateCreation }}</td>
+              <td>
+                <a
+                  class="btn btn-secondary btn-active btn-sm"
+                  (click)="show(item.id)"
+                  ><i class="fa fa-eye"> Consulter</i></a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div
+    class="modal"
+    id="myModal"
+    [style.display]="showModal ? 'block' : 'none'"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Detail du Dossier</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            (click)="hide()"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body"></div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            (click)="hide()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+</div>

@@ -1,0 +1,109 @@
+<div class="animated fadeIn">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-user"></i> Liste des Medecins
+        <div class="card-header-actions">
+          <button class="btn btn-success btn-sm" (click)="exportElmToExcel()">
+            <i class="fa fa-download mr-2"></i> Export
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table text-center table-striped" #medecinTable>
+          <thead class="bg-dark">
+            <tr>
+              <th width="100"><b>Actions</b></th>
+              <th>#Id</th>
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>CIN</th>
+              <th>Telephone</th>
+              <th>Specialité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  *ngIf="medecin.id == null"
+                  class="btn btn-primary btn-block"
+                  (click)="create()"
+                  ><i class="icon-plus text-white"></i
+                ></a>
+                <a
+                  *ngIf="medecin.id != null"
+                  class="btn btn-success btn-block"
+                  (click)="update()"
+                  ><i class="icon-check text-white"></i
+                ></a>
+              </td>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="medecin.nom"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="medecin.prenom"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="medecin.cin"
+                  required
+                />
+              </td>
+              <td>
+                <input
+                  type="tel"
+                  class="form-control"
+                  [(ngModel)]="medecin.telephone"
+                  required
+                />
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="medecin.specialite">
+                  <option *ngFor="let sp of listeSp" [ngValue]="sp">
+                    {{ sp.specialite }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr *ngFor="let item of liste">
+              <td>
+                <a class="btn btn-info btn-sm" (click)="edit(item)"
+                  ><i class="icon-pencil text-white"></i
+                ></a>
+                <a
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteMedecin(item.id)"
+                  ><i class="fa fa-trash text-white"></i
+                ></a>
+              </td>
+              <td scop="row">
+                <b>{{ item.id }}</b>
+              </td>
+              <td>{{ item.nom }}</td>
+              <td>{{ item.prenom }}</td>
+              <td>{{ item.cin }}</td>
+              <td>{{ item.telephone }}</td>
+              <td>
+                <b>{{ item.specialite.specialite }}</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
