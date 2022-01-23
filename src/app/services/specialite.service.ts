@@ -8,7 +8,7 @@ import { Specialite } from '../models/Specialite';
 })
 export class SpecialiteService {
 
-  api = "http://localhost:8080/api/v1/specialites";
+  api = "https://gst-cabinet-springboot.herokuapp.com/api/v1/specialites";
 
   constructor(private http: HttpClient) { }
 

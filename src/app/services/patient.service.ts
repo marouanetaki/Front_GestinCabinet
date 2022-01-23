@@ -7,7 +7,7 @@ import { Patient } from '../models/Patient';
 })
 export class PatientService {
 
-  api = "http://localhost:8080/api/v1/patients";
+  api = "https://gst-cabinet-springboot.herokuapp.com/api/v1/patients";
 
   constructor(private http: HttpClient) { }
 

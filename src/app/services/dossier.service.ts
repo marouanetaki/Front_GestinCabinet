@@ -7,7 +7,7 @@ import { DossierMedical } from '../models/DossierMedical';
 })
 export class DossierService {
 
-  api = "http://localhost:8080/api/v1/dossiers";
+  api = "https://gst-cabinet-springboot.herokuapp.com/api/v1/dossiers";
 
   constructor(private http: HttpClient) { }
 

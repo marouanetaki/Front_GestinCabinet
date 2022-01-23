@@ -7,7 +7,7 @@ import { Rdv } from '../models/Rdv';
 })
 export class RdvService {
 
-  api = "http://localhost:8080/api/v1/rdvs";
+  api = "https://gst-cabinet-springboot.herokuapp.com/api/v1/rdvs";
 
   constructor(private http: HttpClient) { }
 
